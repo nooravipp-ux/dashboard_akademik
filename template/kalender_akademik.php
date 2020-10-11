@@ -1,11 +1,4 @@
-<?php 
-$base_url ='/dashboard_akademik';
-session_start();
-if(!isset($_SESSION['loged_in'])){
-    $_SESSION['loged_in'] = false;
-    $_SESSION['id_group'] = 0;
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,8 +35,6 @@ if(!isset($_SESSION['loged_in'])){
 </head>
 
 <body class="bg-theme bg-theme1">
-    <?php 
-    if($_SESSION['loged_in'] != false && $_SESSION['id_group'] != 0) { ?>
     <!-- Start wrapper-->
     <div id="wrapper">
 
@@ -147,23 +138,8 @@ if(!isset($_SESSION['loged_in'])){
 
         <div class="content-wrapper">
             <div class="container-fluid">
-        <?php } ?>
                 <!--Start Dashboard Content-->
-                <?php 
-                if($_SESSION['loged_in'] == false && $_SESSION['id_group'] == 0){
-                    include 'template/auth/login.php';
-                }elseif(($_SESSION['loged_in'] == true) && (($_SESSION['id_group'] == 12 || $_SESSION['id_group'] == 11))){
-                    include 'template/d_mhs.php';
-                }elseif(($_SESSION['loged_in'] == true) && ($_SESSION['id_group'] == 13)){
-                    include 'template/d_prodi.php';
-                }elseif(($_SESSION['loged_in'] == true) && ($_SESSION['id_group'] == 10)){
-                    include 'template/d_dosen.php';
-                }else{
-                    include 'template/auth/login.php';
-                }?>
-
-                <?php 
-                    if($_SESSION['loged_in'] != false && $_SESSION['id_group'] != 0) { ?>
+                
                 <div class="overlay toggle-menu"></div>
                 <!--end overlay-->
             </div>
@@ -224,10 +200,9 @@ if(!isset($_SESSION['loged_in'])){
 
     </div>
     <!--End wrapper-->
-                    <?php } ?>
 
     <!-- Bootstrap core JavaScript-->
-    
+
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 
@@ -241,7 +216,7 @@ if(!isset($_SESSION['loged_in'])){
     <script src="assets/js/app-script.js"></script>
     <!-- Chart js -->
 
-    
+
 
     <!-- Index js -->
     <!-- <script src="assets/js/index.js"></script> -->

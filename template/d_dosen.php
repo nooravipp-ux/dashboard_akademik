@@ -1,117 +1,15 @@
 <?php 
-$base_dir = $_SERVER['DOCUMENT_ROOT'].'/sistemik_dashboard_mobile';
-$base_url = '/sistemik_dashboard_mobile';
+$base_dir = $_SERVER['DOCUMENT_ROOT'].'/dashboard_akademik';
+$base_url = '/dashboard_akademik';
 include $base_dir.'/src/database/database.php';
 
 $db = new database();
 $kalender = $db->get_data_kalender_akademik();
 $jadwal_pagi = $db->tampil_jadwal_ajar_dosen_pagi('0402017301','20201');
 $jadwal_sore = $db->tampil_jadwal_ajar_dosen_sore('0402017301','20201');
-// var_dump($jadwal_sore);
-// die();
+
 
 ?>
-<div class="card mt-3">
-    <div class="card-content">
-        <div class="row row-group m-0">
-            <div class="col-12 col-lg-6 col-xl-3 border-light">
-                <div class="card-body">
-                    <h5 class="text-white mb-0"><?= $_SESSION['username'];?><span class="float-right"></h5>
-                    <div class="progress my-3" style="height:3px;">
-                        <div class="progress-bar" style="width:100%"></div>
-                    </div>
-                    <p class="mb-0 text-white small-font"><?= $_SESSION['id_user'];?></p>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 col-xl-3 border-light">
-                <div class="card-body">
-                    <h5 class="text-white mb-0"></h5>
-                    <div class="progress my-3" style="height:3px;">
-                        <div class="progress-bar" style="width:100%"></div>
-                    </div>
-                    <p class="mb-0 text-white small-font">IPK</p>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 col-xl-3 border-light">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="">
-
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                    Belum
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="" disabled="disabled">
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                    Sudah
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress my-3" style="height:3px;">
-                        <div class="progress-bar" style="width:100%"></div>
-                    </div>
-                    <p class="mb-0 text-white small-font">Status Pembayaran (LUNAS)</p>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 col-xl-3 border-light">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="" disabled="disabled">
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                    KRS
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="" disabled="disabled">
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                    UTS
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="" disabled="disabled">
-                                    <span class="form-check-sign">
-                                        <span class="check"></span>
-                                    </span>
-                                    UAS
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress my-3" style="height:3px;">
-                        <div class="progress-bar" style="width:100%"></div>
-                    </div>
-                    <p class="mb-0 text-white small-font">Di Perbolehkan Untuk</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-12 col-lg-12">
         <div class="card">
@@ -212,7 +110,7 @@ $jadwal_sore = $db->tampil_jadwal_ajar_dosen_sore('0402017301','20201');
 <div class="row">
     <div class="col-12 col-lg-12">
         <div class="card">
-            <div class="card-header">History Semester <?php echo $_SESSION['smt_aktif'] ?>
+            <div class="card-header">History <?php echo $_SESSION['smt_aktif'] ?>
                 <div class="card-action">
                     <div class="dropdown">
                         <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
@@ -230,10 +128,10 @@ $jadwal_sore = $db->tampil_jadwal_ajar_dosen_sore('0402017301','20201');
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table align-items-center table-flush table-borderless">
+                <table class="table hover">
                     <thead>
                         <tr>
-                            <th>Mata Kuliah</th>
+                            <th>NIM</th>
                             <th>Nama Mhs</th>
                             <th>Nilai</th>
                         </tr>

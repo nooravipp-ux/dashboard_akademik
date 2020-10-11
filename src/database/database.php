@@ -105,9 +105,8 @@ class Database {
     function jumlah_mhs_aktif($kode_prodi){
         $query = "select count(*) as jumlah_mhs from view_0022_daftar_mhs_aktif where kode_jurusan = '$kode_prodi'";
         $data = mysqli_query($this->conn, $query);
-        while($row = mysqli_fetch_array($data)){
-			$jumlah_mhs = $row;
-		}
+        $row = mysqli_fetch_array($data);
+		$jumlah_mhs = $row['jumlah_mhs'];
 		return $jumlah_mhs;
     }
 
@@ -120,6 +119,44 @@ class Database {
             $data[] = $row;
         }
 		return json_encode($data);
+    }
+
+    function jumlah_dosen($kode_prodi){
+        $query = "SELECT COUNT(DISTINCT nama_dosen) AS jumlah_dosen FROM ajar_dosen WHERE kode_jurusan = '$kode_prodi'";
+        $result = mysqli_query($this->conn, $query);
+        $row = mysqli_fetch_array($result);
+        $hasil = $row['jumlah_dosen'];
+
+		return $hasil;
+    }
+
+    function krs_di_setujui($kode_prodi, $tahun_ajar){
+        $query = "SELECT COUNT(*) AS jml_krs_di_setujui FROM view_0016_krs_mhs WHERE status_krs = 1 AND kode_jurusan = '$kode_prodi' AND semester_mhs = '$tahun_ajar'";
+        $result = mysqli_query($this->conn, $query);
+        $row = mysqli_fetch_array($result);
+        $krs_disetujui = $row['jml_krs_di_setujui'];
+
+		return $krs_disetujui;
+    }
+
+    function mhs_krs($kode_prodi, $tahun_ajar){
+        $query = "SELECT COUNT(DISTINCT nim) AS mhs_krs FROM view_0016_krs_mhs WHERE kode_jurusan = '55201' AND semester_mhs = '20201'";
+        $result = mysqli_query($this->conn, $query);
+        $row = mysqli_fetch_array($result);
+        $mhs_krs = $row['mhs_krs'];
+
+		return $mhs_krs;
+    }
+    
+    function mata_kuliah_dosen_ajar($kode_prodi, $tahun_ajar){
+        $query = "SELECT kode_mk, nama_mk, nama_dosen_pagi, nama_dosen_sore FROM v_dosen_ajar_real WHERE kode_jurusan = '$kode_prodi' AND semester = '$tahun_ajar' AND id_kurikulum = 11";
+        $result = mysqli_query($this->conn, $query);
+        $data = array();
+
+        foreach($result as $row){
+            $mk_dosen[] = $row;
+        }
+		return $mk_dosen;
     }
 
     //dosen
