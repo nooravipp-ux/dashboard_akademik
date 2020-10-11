@@ -247,7 +247,7 @@ $sks_ditempuh = $db->count_sks_ditempuh($_SESSION['id_user']);
                     </div>
                 </div>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" style="height:400px;overflow:auto;">
                 <table class="table"
                     style="height:440px;overflow:auto;">
                     <thead>
@@ -292,7 +292,7 @@ $sks_ditempuh = $db->count_sks_ditempuh($_SESSION['id_user']);
 <div class="row">
     <div class="col-12 col-lg-12">
         <div class="card">
-            <div class="card-header">Jadwal Kuliah Tahun Akademik <?php echo $_SESSION['smt_aktif'] ?>
+            <div class="card-header">Jadwal Kuliah <?php echo $_SESSION['smt_aktif'] ?>
                 <div class="card-action">
                     <div class="dropdown">
                         <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
@@ -309,8 +309,8 @@ $sks_ditempuh = $db->count_sks_ditempuh($_SESSION['id_user']);
                     </div>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table align-items-center table-flush table-borderless">
+            <div class="table-responsive" style="height:500px;overflow:auto;">
+                <table class="table align-items-center table-flush hover">
                     <thead>
                         <tr>
                             <th>Smt</th>

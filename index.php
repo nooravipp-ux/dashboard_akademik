@@ -51,7 +51,7 @@ if(!isset($_SESSION['loged_in'])){
         <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
             <div class="brand-logo">
                 <a href="index.html">
-                    <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                    <img src="assets/images/unnur.png" class="logo-icon" alt="logo icon" width="100px">
                     <h5 class="logo-text">SISTEMIK</h5>
                 </a>
             </div>
