@@ -1,6 +1,6 @@
 <?php 
-$base_dir = $_SERVER['DOCUMENT_ROOT'].'/sistemik_dashboard_mobile';
-$base_url = '/sistemik_dashboard_mobile';
+$base_dir = $_SERVER['DOCUMENT_ROOT'].'/dashboard_akademik';
+$base_url = '/dashboard_akademik';
 include $base_dir.'/src/database/database.php';
 
 $db = new database();

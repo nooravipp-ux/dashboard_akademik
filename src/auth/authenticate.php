@@ -1,8 +1,8 @@
 <?php 
 
 session_start();
-$base_dir = $_SERVER['DOCUMENT_ROOT'].'/sistemik_dashboard_mobile';
-$base_url = '/sistemik_dashboard_mobile';
+$base_dir = $_SERVER['DOCUMENT_ROOT'].'/dashboard_akademik';
+$base_url = '/dashboard_akademik';
 include $base_dir.'/src/database/database.php';
 
 if ( !isset($_POST['username'], $_POST['password']) ) {
@@ -23,10 +23,10 @@ if($cek_auth == true){
     $_SESSION['kode_jurusan'] = $data_user['kode_jurusan'];
     $_SESSION['smt'] = $semester_aktif['semester'];
     $_SESSION['smt_aktif'] = $semester_aktif['smt_name'];
-    header("Location: /sistemik_dashboard_mobile");
+    header("Location: /dashboard_akademik");
 }else{
     $_SESSION['login_failed'] = 'GAGAL LOGIN !';
     $_SESSION['loged_in'] = false;
-    header("Location: /sistemik_dashboard_mobile");
+    header("Location: /dashboard_akademik");
 }
 ?>
