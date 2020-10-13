@@ -15,14 +15,12 @@ if(!isset($_SESSION['loged_in'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <title>Universitas Nurtanio Bandung</title>
     <!-- loader-->
     <link href="assets/css/pace.min.css" rel="stylesheet" />
     <script src="assets/js/pace.min.js"></script>
     <!--favicon-->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <!-- Vector CSS -->
-    <link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link rel="icon" href="assets/images/unnur.png" type="image/x-icon">
     <!-- simplebar CSS-->
     <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
     <!-- Bootstrap core CSS-->
@@ -50,7 +48,7 @@ if(!isset($_SESSION['loged_in'])){
         <!--Start sidebar-wrapper-->
         <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="">
                     <img src="assets/images/unnur.png" class="logo-icon" alt="logo icon" width="100px">
                     <h5 class="logo-text">SISTEMIK</h5>
                 </a>
@@ -66,6 +64,11 @@ if(!isset($_SESSION['loged_in'])){
                 <li>
                     <a href="https://fikiunnur.omahawan.com/">
                         <i class="zmdi zmdi-invert-colors"></i> <span>Sistemik Unnur</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://fikiunnur.omahawan.com/">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>E-Learning</span>
                     </a>
                 </li>
         </div>
@@ -92,22 +95,13 @@ if(!isset($_SESSION['loged_in'])){
                     <li class="nav-item dropdown-lg">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
                             href="javascript:void();">
-                            <?php echo $_SESSION['smt_aktif'] ?></a>
+                            <small><?php echo $_SESSION['smt_aktif'] ?></small></a>
                     </li>
                     <li class="nav-item dropdown-lg">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
                             href="javascript:void();">
                             <i class="fa fa-bell-o"></i></a>
                     </li>
-                    <li class="nav-item language">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
-                            href="javascript:void();"><i class="fa fa-flag"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
@@ -121,16 +115,11 @@ if(!isset($_SESSION['loged_in'])){
                                         <div class="avatar"><img class="align-self-start mr-3"
                                                 src="https://via.placeholder.com/110x110" alt="user avatar"></div>
                                         <div class="media-body">
-                                            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-                                            <p class="user-subtitle">mccoy@example.com</p>
+                                            <h6 class="mt-2 user-title"><?= $_SESSION['username'] ?></h6>
                                         </div>
                                     </div>
                                 </a>
                             </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
                             <li class="dropdown-divider"></li>
                             <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
                             <li class="dropdown-divider"></li>
@@ -154,7 +143,7 @@ if(!isset($_SESSION['loged_in'])){
                     include 'template/auth/login.php';
                 }elseif(($_SESSION['loged_in'] == true) && (($_SESSION['id_group'] == 12 || $_SESSION['id_group'] == 11))){
                     include 'template/d_mhs.php';
-                }elseif(($_SESSION['loged_in'] == true) && ($_SESSION['id_group'] == 13)){
+                }elseif(($_SESSION['loged_in'] == true) && ($_SESSION['id_group'] == 2)){
                     include 'template/d_prodi.php';
                 }elseif(($_SESSION['loged_in'] == true) && ($_SESSION['id_group'] == 10)){
                     include 'template/d_dosen.php';
@@ -178,7 +167,7 @@ if(!isset($_SESSION['loged_in'])){
         <footer class="footer">
             <div class="container">
                 <div class="text-center">
-                    Copyright © 2018 Dashtreme Admin
+                     <?php echo DATE('Y') ?> Universitas Nurtanio Bandung
                 </div>
             </div>
         </footer>
@@ -235,16 +224,9 @@ if(!isset($_SESSION['loged_in'])){
     <script src="assets/plugins/simplebar/js/simplebar.js"></script>
     <!-- sidebar-menu js -->
     <script src="assets/js/sidebar-menu.js"></script>
-    <!-- loader scripts -->
-    <script src="assets/js/jquery.loading-indicator.js"></script>
     <!-- Custom scripts -->
     <script src="assets/js/app-script.js"></script>
     <!-- Chart js -->
-
-    
-
-    <!-- Index js -->
-    <!-- <script src="assets/js/index.js"></script> -->
 
 
 </body>

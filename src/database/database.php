@@ -10,8 +10,8 @@ class Database {
           
     }
     //LOGIN
-    function get_data_user($usr, $pass){
-        $query = "SELECT * FROM sys_users WHERE username = '$usr' AND password = '$pass'";
+    function get_data_user($username){
+        $query = "SELECT * FROM view_0005_list_user WHERE username = '$username'";
         $result = mysqli_query($this->conn, $query);
         $data = mysqli_fetch_array($result);
         return $data;
@@ -93,7 +93,7 @@ class Database {
     }
 
     function jadwal_kuliah_mhs($kode_prodi, $tahun_ajar, $semester){
-        $query = "select * from view_0011_jadwal_kuliah where view_0011_jadwal_kuliah.kode_jurusan= '$kode_prodi' AND view_0011_jadwal_kuliah.semester = '$tahun_ajar' AND view_0011_jadwal_kuliah.angka_semester = '$semester' order by hari_id asc, angka_semester asc, hari_nama asc";
+        $query = "SELECT nama_mk_mhs, hari_nama_pagi, wkt_kul_deskripsi_pagi, dosen_nama_pagi, hari_nama_sore, wkt_kul_deskripsi_sore, dosen_nama_sore FROM `view_0016_krs_mhs` WHERE  semester_mhs = '$tahun_ajar' AND kode_jurusan = '$kode_prodi' AND nim = '$semester'";
         $data = mysqli_query($this->conn, $query);
         while($row = mysqli_fetch_array($data)){
 			$status_spp[] = $row;
@@ -111,7 +111,7 @@ class Database {
     }
 
     function jumlah_mhs_per_tahun($kode_prodi){
-        $query = "select YEAR(tgl_masuk_sp) as tahun_angkatan, count(*) AS jumlah_mhs from view_0022_daftar_mhs_aktif where kode_jurusan = '$kode_prodi' group by year(tgl_masuk_sp)";
+        $query = "SELECT * FROM (SELECT YEAR(tgl_masuk_sp) AS tahun_angkatan, COUNT(*) AS jumlah_mhs FROM view_0022_daftar_mhs_aktif WHERE kode_jurusan = '$kode_prodi' GROUP BY YEAR(tgl_masuk_sp) ORDER BY tgl_masuk_sp DESC LIMIT 4) mhs_pertahun ORDER BY tahun_angkatan ASC";
         $result = mysqli_query($this->conn, $query);
         $data = array();
 
@@ -119,6 +119,27 @@ class Database {
             $data[] = $row;
         }
 		return json_encode($data);
+    }
+
+    function data_persetujuan_krs($kode_prodi, $tahun_ajar){
+        $query = "SELECT status_krs_nama, COUNT(status_krs_nama) AS jumlah_krs FROM `view_0016_krs_mhs` WHERE semester_mhs = '20201' AND kode_jurusan = '55201' GROUP BY status_krs_nama";
+        $result = mysqli_query($this->conn, $query);
+        $data = array();
+
+        foreach($result as $row){
+            $data[] = $row;
+        }
+		return json_encode($data);
+    }
+    function data_persetujuan_krs_array($kode_prodi, $tahun_ajar){
+        $query = "SELECT status_krs_nama, COUNT(status_krs_nama) AS jumlah_krs FROM `view_0016_krs_mhs` WHERE semester_mhs = '20201' AND kode_jurusan = '55201' GROUP BY status_krs_nama";
+        $result = mysqli_query($this->conn, $query);
+        $data = array();
+
+        foreach($result as $row){
+            $data[] = $row;
+        }
+		return $data;
     }
 
     function jumlah_dosen($kode_prodi){
@@ -129,14 +150,22 @@ class Database {
 
 		return $hasil;
     }
-
-    function krs_di_setujui($kode_prodi, $tahun_ajar){
-        $query = "SELECT COUNT(*) AS jml_krs_di_setujui FROM view_0016_krs_mhs WHERE status_krs = 1 AND kode_jurusan = '$kode_prodi' AND semester_mhs = '$tahun_ajar'";
+    function jumlah_mhs_pagi_sore($kode_prodi, $kelas){
+        $query = "SELECT COUNT(id_group) AS jml_mhs FROM `view_0005_list_user` WHERE id_group = $kelas AND kode_jurusan = '$kode_prodi'";
         $result = mysqli_query($this->conn, $query);
         $row = mysqli_fetch_array($result);
-        $krs_disetujui = $row['jml_krs_di_setujui'];
+        $jml = $row['jml_mhs'];
 
-		return $krs_disetujui;
+		return $jml;
+    }
+
+    function jumlah_krs($kode_prodi, $tahun_ajar){
+        $query = "SELECT COUNT(*) AS jumlah_krs FROM `view_0016_krs_mhs` WHERE semester_mhs = '$tahun_ajar' AND kode_jurusan = '$kode_prodi'";
+        $result = mysqli_query($this->conn, $query);
+        $row = mysqli_fetch_array($result);
+        $krs = $row['jumlah_krs'];
+
+		return $krs;
     }
 
     function mhs_krs($kode_prodi, $tahun_ajar){
@@ -158,7 +187,17 @@ class Database {
         }
 		return $mk_dosen;
     }
+    
+    function data_mhs_per_matkul($kode_prodi, $tahun_ajar){
+        $query = "SELECT kode_mk_mhs, nama_mk_mhs, nama_kelas, COUNT(nim) AS jml_mhs, dosen_nama_pagi, hari_nama_pagi, wkt_kul_deskripsi_pagi, dosen_nama_sore, hari_nama_sore, wkt_kul_deskripsi_sore FROM `view_0016_krs_mhs` WHERE kode_jurusan = '$kode_prodi' AND semester_mhs = '$tahun_ajar' GROUP BY kode_mk_mhs";
+        $result = mysqli_query($this->conn, $query);
+        $data = array();
 
+        foreach($result as $row){
+            $data[] = $row;
+        }
+		return $data;
+    }
     //dosen
     function tampil_jadwal_ajar_dosen_pagi($nidn,$tahun_ajar){
         $query = "SELECT angka_semester, nama_mk, sks_tm,hari_nama,nama_kelas_pagi, wkt_kul_deskripsi_pagi FROM view_0011_jadwal_kuliah WHERE semester = '$tahun_ajar' AND dosen_nidn_pagi = '$nidn' ORDER BY angka_semester ASC";

@@ -4,7 +4,7 @@ require_once('database/database.php');
 session_start();
 $db = new Database();
 
-$jumlah_mhs_pertahun = $db->jumlah_mhs_per_tahun($_SESSION['kode_jurusan']);
-echo $jumlah_mhs_pertahun;
+$data_krs = $db->data_persetujuan_krs($_SESSION['kode_jurusan'], $_SESSION['smt']);
+echo $data_krs;
 
 ?>

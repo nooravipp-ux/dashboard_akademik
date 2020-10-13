@@ -5,8 +5,8 @@ include $base_dir.'/src/database/database.php';
 
 $db = new database();
 $kalender = $db->get_data_kalender_akademik();
-$jadwal_pagi = $db->tampil_jadwal_ajar_dosen_pagi('0402017301','20201');
-$jadwal_sore = $db->tampil_jadwal_ajar_dosen_sore('0402017301','20201');
+$jadwal_pagi = $db->tampil_jadwal_ajar_dosen_pagi($_SESSION['id_user'],$_SESSION['smt']);
+$jadwal_sore = $db->tampil_jadwal_ajar_dosen_sore($_SESSION['id_user'],$_SESSION['smt']);
 
 
 ?>
@@ -32,13 +32,19 @@ $jadwal_sore = $db->tampil_jadwal_ajar_dosen_sore('0402017301','20201');
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>Nama Kegiatan</td>
+                                <td>Tanggal Kegiatan</td>
+                                <td>Deskripsi</td>
+                            </tr>
+                        </thead>
                         <tbody>
                             <?php foreach($kalender as $data){ ?>
                             <tr>
                                 <td><?= $data['m_kegiatan_nama'] ?></td>
-                            </tr>
-                            <tr>
+                                <td><?= $data['t_kegiatan_tgl_awal']?> s/d <?= $data['t_kegiatan_tgl_akhir']?></td>
                                 <td><?= $data['t_kegiatan_deskripsi'] ?></td>
                             </tr>
                             <?php }?>
@@ -49,8 +55,6 @@ $jadwal_sore = $db->tampil_jadwal_ajar_dosen_sore('0402017301','20201');
         </div>
     </div>
 </div>
-<!--End Row-->
-
 <div class="row">
     <div class="col-12 col-lg-12">
         <div class="card">
